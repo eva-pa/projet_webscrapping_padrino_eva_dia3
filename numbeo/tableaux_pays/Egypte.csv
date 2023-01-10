@@ -1,0 +1,4 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Le Caire,"22,95","5,24","14,49","19,32","19,78","22,52",Egypte
+1,2,Alexandrie,"19,81","3,74","12,13","17,15","19,05","20,36",Egypte
+2,3,Gizeh,"19,22","2,84","11,39","17,00","14,65","23,93",Egypte

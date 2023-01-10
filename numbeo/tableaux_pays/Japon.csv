@@ -1,0 +1,4 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Tokyo,"70,56","32,60","52,42","76,18","41,19","91,42",Japon
+1,2,Nagoya,"64,55","45,00","55,21","67,39","36,25","75,40",Japon
+2,3,Osaka,"62,88","21,81","43,25","62,30","39,79","91,15",Japon

@@ -1,0 +1,6 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Stockholm,"68,79","35,52","52,89","60,39","65,24","96,00",Suède
+1,2,Lund,"62,63","21,73","43,08","56,07","53,95","111,19",Suède
+2,3,Uppsala,"62,22","20,89","42,47","52,51","63,34","91,07",Suède
+3,4,Malmö,"61,07","20,38","41,62","52,98","61,84","109,37",Suède
+4,5,Göteborg,"60,21","24,68","43,23","53,17","56,14","104,36",Suède

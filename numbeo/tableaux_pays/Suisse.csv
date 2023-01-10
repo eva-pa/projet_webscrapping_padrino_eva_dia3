@@ -1,0 +1,7 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Bâle,"126,28","45,08","87,47","133,36","118,11","121,30",Suisse
+1,2,Zurich,"118,20","60,65","90,70","112,61","117,55","124,30",Suisse
+2,3,Lausanne,"117,13","52,19","86,09","112,66","111,67","106,35",Suisse
+3,4,Zoug,"115,55","64,35","91,08","108,76","125,05","130,39",Suisse
+4,5,Berne,"113,23","37,54","77,05","114,06","106,91","134,24",Suisse
+5,6,Genève,"104,85","67,24","86,88","98,59","112,19","113,06",Suisse

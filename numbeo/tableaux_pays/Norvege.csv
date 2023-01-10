@@ -1,0 +1,6 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Oslo,"88,91","37,13","64,17","80,35","94,60","97,82",Norvège
+1,2,Stavanger,"86,53","29,06","59,06","78,37","90,05","91,15",Norvège
+2,3,Bergen,"85,74","29,57","58,90","81,49","83,26","87,54",Norvège
+3,4,Trondheim,"82,65","29,59","57,29","74,72","90,12","115,39",Norvège
+4,5,Tromso (Tromsø),"82,22","29,89","57,21","75,32","93,25","101,69",Norvège

@@ -1,0 +1,5 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Anvers,"67,36","23,40","46,35","51,92","77,34","91,01",La Belgique
+1,2,Bruxelles,"67,17","29,20","49,02","55,87","69,47","98,89",La Belgique
+2,3,Louvain,"65,38","23,58","45,40","52,59","70,70","96,10",La Belgique
+3,4,Gand,"64,59","24,26","45,31","52,05","71,80","82,14",La Belgique

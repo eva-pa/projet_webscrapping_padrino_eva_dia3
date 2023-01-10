@@ -1,0 +1,6 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Innsbruck,"67,94","27,18","48,46","55,30","69,51","73,63",L'Autriche
+1,2,Graz,"66,48","20,12","44,32","61,12","56,65","94,83",L'Autriche
+2,3,Salzbourg,"65,46","26,42","46,80","55,34","65,69","95,83",L'Autriche
+3,4,Linz,"65,07","22,00","44,48","56,63","63,67","88,28",L'Autriche
+4,5,Vienne,"60,32","25,96","43,90","52,11","65,41","115,87",L'Autriche

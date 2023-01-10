@@ -1,0 +1,6 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Marrakech,"33,04","9,16","21,63","25,29","29,29","27,58",Maroc
+1,2,Casablanca,"32,73","11,26","22,47","26,80","22,84","35,53",Maroc
+2,3,Rabat,"31,91","12,16","22,47","27,44","23,56","32,87",Maroc
+3,4,Tanger,"28,81","8,42","19,06","26,57","19,85","36,57",Maroc
+4,5,Ajdir (Al Hoceïma),"28,73","4,94","17,36","24,55","26,36","33,94",Maroc

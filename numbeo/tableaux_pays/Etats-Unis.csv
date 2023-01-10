@@ -1,0 +1,65 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,"Santa Barbara, Californie","110,95","92,44","102,10","116,39","115,45","72,30",États Unis
+1,2,"Honolulu, Hawaii","101,43","61,61","82,40","110,44","81,22","84,48",États Unis
+2,3,"New York, New York","100,00","100,00","100,00","100,00","100,00","100,00",États Unis
+3,4,"San Francisco, Californie","98,45","91,90","95,32","97,42","97,44","105,87",États Unis
+4,5,"Seattle, Washington","91,78","67,84","80,34","87,16","95,16","129,30",États Unis
+5,6,"Oakland, Californie","89,53","74,84","82,51","89,82","81,25","90,32",États Unis
+6,7,"Anchorage, Alaska","87,07","40,70","64,91","89,55","78,24","105,37",États Unis
+7,8,"Boston, Massachusetts","84,07","75,27","79,87","81,20","88,05","112,83",États Unis
+8,9,"Sacramento, Californie","83,76","52,23","68,69","87,35","72,57","116,49",États Unis
+9,10,"Washington, District de Colombie","83,10","71,29","77,45","80,85","82,60","127,39",États Unis
+10,11,"San Jose, Californie","82,68","73,47","78,28","77,65","82,10","141,18",États Unis
+11,12,"San Diego, Californie","81,99","75,82","79,04","75,80","83,74","120,39",États Unis
+12,13,"Nashville, Tennessee","81,17","59,23","70,68","83,51","72,96","112,48",États Unis
+13,14,"Miami, Floride","81,16","71,55","76,56","78,78","88,72","91,58",États Unis
+14,15,"Denver, Colorado","80,77","54,95","68,43","77,55","73,71","140,71",États Unis
+15,16,"Irvine, Californie","80,64","72,32","76,66","73,86","89,04","133,83",États Unis
+16,17,"Portland, Oregon","79,82","50,63","65,87","78,62","72,91","120,75",États Unis
+17,18,"La Nouvelle-Orléans, Louisiane","79,60","44,83","62,98","77,66","79,39","97,53",États Unis
+18,19,"Raleigh, Caroline du Nord","79,17","59,26","69,66","72,11","80,55","112,07",États Unis
+19,20,"Philadelphie, Pennsylvanie","78,42","48,93","64,33","77,68","76,98","132,19",États Unis
+20,21,"Chicago, Illinois","78,32","58,11","68,66","74,06","82,37","124,87",États Unis
+21,22,"Los Angeles, Californie","78,07","74,25","76,24","74,02","86,91","118,37",États Unis
+22,23,"Buffalo, New York","77,37","35,26","57,24","77,98","69,76","117,04",États Unis
+23,24,"Pittsburgh, Pennsylvanie","76,94","38,03","58,34","82,85","63,47","120,84",États Unis
+24,25,"Charlotte, Caroline du Nord","76,74","58,94","68,23","74,22","74,71","119,43",États Unis
+25,26,"Cleveland, Ohio","76,49","38,90","58,52","78,64","67,30","137,51",États Unis
+26,27,"Dallas, Texas","76,29","52,65","64,99","74,61","77,80","139,37",États Unis
+27,28,"Baltimore, Maryland","75,59","48,02","62,41","77,73","66,77","138,25",États Unis
+28,29,"Tampa, Floride","75,25","58,87","67,42","69,48","77,05","130,32",États Unis
+29,30,"Long Beach, Californie","75,14","59,68","67,75","76,19","80,56","124,75",États Unis
+30,31,"Omaha, Nebraska","75,04","30,11","53,57","68,20","78,18","119,69",États Unis
+31,32,"Indianapolis, Indiana","74,46","37,23","56,67","73,66","73,81","136,05",États Unis
+32,33,"Birmingham, Alabama","74,20","37,39","56,61","77,59","67,07","88,06",États Unis
+33,34,"Fort Worth, Texas","74,18","42,74","59,16","76,86","62,82","128,83",États Unis
+34,35,"Minneapolis, Minnesota","74,05","47,57","61,39","71,22","76,66","136,15",États Unis
+35,36,"Austin, Texas","73,36","66,24","69,95","69,60","78,86","128,84",États Unis
+36,37,"Phoenix, Arizona","73,20","48,40","61,35","68,40","77,00","143,01",États Unis
+37,38,"Chattanooga, Tennessee","72,99","37,70","56,12","68,42","70,61","127,20",États Unis
+38,39,"Atlanta, Géorgie","72,94","50,87","62,39","68,46","66,77","128,16",États Unis
+39,40,"Columbus, Ohio","72,24","41,72","57,65","65,98","66,98","127,39",États Unis
+40,41,"Fort Lauderdale, Floride","72,10","62,69","67,60","68,37","81,36","124,53",États Unis
+41,42,"Detroit, Michigan","72,09","37,08","55,36","69,02","64,26","120,68",États Unis
+42,43,"Spokane, Washington","71,89","40,72","56,99","66,70","74,87","115,89",États Unis
+43,44,"Las Vegas, Nevada","71,88","40,16","56,72","63,62","72,16","120,58",États Unis
+44,45,"Reno, Nevada","71,80","44,83","58,91","70,86","73,42","77,55",États Unis
+45,46,Orlando Floride,"71,42","50,88","61,60","68,22","76,05","139,80",États Unis
+46,47,"Colorado Springs, Colorado","71,30","38,16","55,46","66,41","77,91","136,37",États Unis
+47,48,"Fresno, Californie","71,21","44,52","58,45","64,23","67,54","122,59",États Unis
+48,49,"Madison, Wisconsin","71,12","43,69","58,01","68,88","68,86","99,32",États Unis
+49,50,"Milwaukee, Wisconsin","70,49","37,25","54,60","61,43","67,50","155,79",États Unis
+50,51,"Oklahoma City, Oklahoma","69,94","37,68","54,52","71,15","54,75","95,33",États Unis
+51,52,"Boise, Idaho","69,43","44,35","57,44","63,44","67,86","113,54",États Unis
+52,53,"Albuquerque, Nouveau-Mexique","69,36","42,56","56,55","66,49","67,96","157,29",États Unis
+53,54,"Houston, Texas","69,16","44,44","57,35","62,38","73,20","148,73",États Unis
+54,55,"Jacksonville, Floride","69,02","37,81","54,10","74,40","66,22","149,27",États Unis
+55,56,"Kansas City, Missouri","68,08","40,50","54,90","61,79","72,23","123,65",États Unis
+56,57,"Tucson, Arizona","67,55","33,53","51,29","68,00","64,39","134,77",États Unis
+57,58,"Saint Louis, Missouri","67,07","34,12","51,32","66,84","64,20","104,21",États Unis
+58,59,"San Antonio, Texas","66,81","41,40","54,67","58,94","69,84","142,99",États Unis
+59,60,"Louisville, Kentucky","65,78","30,96","49,14","65,10","63,98","154,08",États Unis
+60,61,"Salt Lake City, Utah","65,10","44,97","55,48","61,98","71,42","134,84",États Unis
+61,62,"Memphis, Tennessee","64,34","35,57","50,59","64,34","66,00","169,98",États Unis
+62,63,"Cincinnati, Ohio","63,67","39,78","52,25","62,78","60,54","117,93",États Unis
+63,64,"Knoxville, Tennessee","60,02","33,74","47,46","56,36","57,35","146,98",États Unis

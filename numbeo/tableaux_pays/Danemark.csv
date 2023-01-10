@@ -1,0 +1,5 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Odense,"82,85","26,32","55,83","71,14","101,12","90,04",Danemark
+1,2,Copenhague,"80,28","44,92","63,38","61,46","97,15","98,72",Danemark
+2,3,Arhus,"78,61","30,42","55,58","60,02","92,16","103,31",Danemark
+3,4,Aalborg,"75,00","20,65","49,03","61,89","84,91","119,34",Danemark

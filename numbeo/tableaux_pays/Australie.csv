@@ -1,0 +1,9 @@
+,classement,ville,idx_cout_vie,idx_loyer,idx_cout_vie_loyer,idx_courses,idx_prix_restaurants,idx_pouvoir_achat_local,Pays
+0,1,Canberra,"83,66","47,38","66,32","77,08","86,77","96,51",Australie
+1,2,Brisbane,"80,99","41,01","61,88","75,47","72,54","102,83",Australie
+2,3,Adélaïde,"80,53","38,55","60,47","77,64","73,07","91,18",Australie
+3,4,Sydney,"80,20","52,49","66,95","72,09","73,59","112,18",Australie
+4,5,Perth,"78,93","38,84","59,77","71,14","76,42","102,48",Australie
+5,6,Melbourne,"76,81","38,05","58,29","74,20","75,59","112,64",Australie
+6,7,Hobart,"68,72","22,75","46,75","62,48","69,46","128,94",Australie
+7,8,Gold Coast,"66,95","37,53","52,89","63,48","60,55","120,20",Australie
