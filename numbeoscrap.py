@@ -170,7 +170,7 @@ def modifTabAllV2():
 
 def modifCoordinatesV2():
     path = os.getcwd()
-    directory = '{}\\numbeo\\tabAll\\tabAllCountries.csv'.format(path)
+    directory = '{}\\numbeo\\tabAll\\tabAllCountries_v2.csv'.format(path)
     df = pd.read_csv(directory)
     #Quebec City
     df.loc[ df["ville"] =="La ville de Québec (existing value)", "lat"] = 46.81213588141209
@@ -185,17 +185,17 @@ def modifCoordinatesV2():
     df.loc[ df["ville"] =="Brasilia", "lat"] = -15.7934036
     df.loc[ df["ville"] =="Brasilia", "lon"] = -47.8823172
     # Ajdir (Al Hoceïma) au Maroc
-    df.loc[ df["ville"] =="Ajdir (Al Hoceïma)", "lat"] = 
-    df.loc[ df["ville"] =="Ajdir (Al Hoceïma)", "lon"] = 
+    df.loc[ df["ville"] =="Ajdir (Al Hoceïma)", "lat"] = 35.24585232196229
+    df.loc[ df["ville"] =="Ajdir (Al Hoceïma)", "lon"] = -3.9336508363095124
     # Zoug en Suisse
-    df.loc[ df["ville"] =="Zoug", "lat"] = 
-    df.loc[ df["ville"] =="Zoug", "lon"] = 
+    df.loc[ df["ville"] =="Zoug", "lat"] = 47.16721239749653
+    df.loc[ df["ville"] =="Zoug", "lon"] = 8.515408091291068
     # Bergame en Italie
-    df.loc[ df["ville"] =="Bergame", "lat"] = 
-    df.loc[ df["ville"] =="Bergame", "lon"] = 
+    df.loc[ df["ville"] =="Bergame", "lat"] = 45.6937582592198
+    df.loc[ df["ville"] =="Bergame", "lon"] = 9.669262467441616
     # Brescia en Italie
-    df.loc[ df["ville"] =="Brescia", "lat"] = 
-    df.loc[ df["ville"] =="Brescia", "lon"] =   
+    df.loc[ df["ville"] =="Brescia", "lat"] = 45.53788582687871 
+    df.loc[ df["ville"] =="Brescia", "lon"] = 10.213862655436365
     
     dir_final = '{}\\numbeo\\tabAll\\tabAllCountries_v2.csv'.format(path)
     df.to_csv(dir_final)
@@ -220,7 +220,7 @@ def testFunct(col_a, col_b):
 # SaveTabsCountry()
 #SaveOneTab()
 #modifTabAllV2()
-
+#modifCoordinatesV2()
 
 #Données pour lancer test
 #df = getDf_Url('https://fr.numbeo.com/co%C3%BBt-de-la-vie/pays/Kosovo-territoire-conteste')
