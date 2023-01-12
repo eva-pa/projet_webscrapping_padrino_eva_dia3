@@ -221,6 +221,8 @@ def testFunct(col_a, col_b):
 #SaveOneTab()
 #modifTabAllV2()
 #modifCoordinatesV2()
+#driver.close()
+
 
 #Données pour lancer test
 #df = getDf_Url('https://fr.numbeo.com/co%C3%BBt-de-la-vie/pays/Kosovo-territoire-conteste')
