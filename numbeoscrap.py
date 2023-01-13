@@ -37,7 +37,7 @@ def getCountryListOnline():
     # Page principale pour choisir tous les pays
     driver.get('https://fr.numbeo.com/co%C3%BBt-de-la-vie/page-de-d%C3%A9marrage')
     soup=BeautifulSoup(driver.page_source,'html.parser')
-
+    
 
     # Obtenir la liste de tous les pays disponibles sur le site pour construire les liens pour scrapper les tableaux.
     pays_options = soup.find('div',{'class' :'select_location_form standard_margin'}).find_all('option')[1:]
