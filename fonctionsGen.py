@@ -51,6 +51,12 @@ def DistanceFromPoint(df,col_lat,col_lon,lat_point,lon_point):
         distance = haversine(pointInput,point_df, unit=Unit.METERS)
         distances.append(distance)
     return distances
+
+def SortDistancesAscending(df,col_dist):
+    return df.sort_values(col_dist)
+
+def DistanceMax(dist_max,sorted_df,col_dist):
+    return sorted_df[sorted_df[col_dist]<=distmax]
 """
 def remove_accents(string_list):
     # Créer une liste vide pour stocker les chaînes de caractères sans accent
