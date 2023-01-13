@@ -1,6 +1,7 @@
 ##### Fonctions générales 
 import unicodedata
 from geopy.geocoders import Nominatim
+from haversine import haversine, Unit
 
 ##### Initialisation de variables
 geolocator = Nominatim(user_agent="loc-numbeo")
@@ -41,7 +42,15 @@ def getLatLon(city,country):
     lon = localisation.longitude
 
     return lat,lon
-    
+
+def DistanceFromPoint(df,col_lat,col_lon,lat_point,lon_point):
+    pointInput = (lat_point, lon_point)
+    distances = []
+    for index,row in df.iterrows():
+        point_df = (row[col_lat],row[col_lon])
+        distance = haversine(pointInput,point_df, unit=Unit.METERS)
+        distances.append(distance)
+    return distances
 """
 def remove_accents(string_list):
     # Créer une liste vide pour stocker les chaînes de caractères sans accent
