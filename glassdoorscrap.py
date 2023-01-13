@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 # !pip install -U deep-translator
 
 options = webdriver.ChromeOptions()
-# options.add_argument('-headless')
+#options.add_argument('-headless')
 options.add_argument('-no-sandbox')
 options.add_argument('-disable-dev-shm-usage')
 options.add_argument("enable-automation")
@@ -41,6 +41,8 @@ def EcosiaGlassdoor(poste, localisation):
 def ExtractInfoSalary(url_glassdoor):
     driver.get(url_glassdoor)
     time.sleep(5)
+    driver.get(url_glassdoor)
+    time.sleep(5)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     minimum = None
     moyenne = None
@@ -53,6 +55,7 @@ def ExtractInfoSalary(url_glassdoor):
         if len(minimum) != 0:
             minimum = minimum[0].text
             minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
+            minimum = minimum  * 1000
 
     if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
         moyenne = soup.find(
@@ -60,59 +63,34 @@ def ExtractInfoSalary(url_glassdoor):
         if len(moyenne) != 0:
             moyenne = moyenne[0].text
             moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
-
+            moyenne = moyenne  * 1000
     if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
         maximum = soup.find(
             'div', class_='d-flex flex-column align-items-end col').find_all('p')
         if len(maximum) != 0:
             maximum = maximum[0].text
             maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
+            maximum = maximum  * 1000
     if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
         titre_page = soup.find(
             'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
     if soup.find('span', class_='d-inline-flex pt-xxsm mt-0 align-items-center') != None:
         localisation_page = soup.find(
             'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
+        
+    if minimum==None and maximum == None and moyenne==None:
+        if soup.find('div',class_='row mt-lg') != None:
+            moy = soup.find('div',class_='row mt-lg').find_all('span')
+            if len(moy)!=0:
+                span_els = [el.text for el in moy]
+                moyenne = span_els[1].replace(',','')
+                moyenne = [*moyenne]
+                moyenne = [int(i) for i in moyenne if i.isdigit()]
+                moyenne = int(''.join([str(i) for i in moyenne]))
 
     return {"minSal": minimum, "moySal": moyenne, "maxSal": maximum, "titrePage": titre_page, "localisationPage": localisation_page}
 
 
-# Test
-#soup = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")
-driver.get("https://www.glassdoor.fr/Salaires")
-time.sleep(5)
-soup = BeautifulSoup(driver.page_source, 'html.parser')
-# time.sleep(10)
-minimum = None
-moyenne = None
-maximum = None
-if len(soup.find_all('div', class_='d-flex flex-column col')) == 3:
-    minimum = soup.find_all(
-        'div', class_='d-flex flex-column col')[2].find_all('p')
-    if len(minimum) != 0:
-        minimum = minimum[0].text
-        minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
-
-
-if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
-    moyenne = soup.find(
-        'div', class_='d-flex flex-column align-items-center col').find_all('p')
-    if len(moyenne) != 0:
-        moyenne = moyenne[0].text
-        moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
-
-if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
-    maximum = soup.find(
-        'div', class_='d-flex flex-column align-items-end col').find_all('p')
-    if len(maximum) != 0:
-        maximum = maximum[0].text
-        maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
-if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
-    titre_page = soup.find(
-        'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
-if soup.find('span', class_='d-inline-flex pt-xxsm mt-0 align-items-center') != None:
-    localisation_page = soup.find(
-        'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
 
 
 def formPosteLoc(poste, localisation):
@@ -158,8 +136,17 @@ def formPosteLoc(poste, localisation):
     return driver.current_url
 
 
-def extractFromPage(soup):
-    print(1)
+def ObtainResultSal(poste,ville,pays):
+    localisation = '{}, {}'.format(ville, pays)
+    localisation_en = GoogleTranslator(target='en').translate(localisation)
+    url_salaires= EcosiaGlassdoor(poste, localisation_en)  
+    if url_salaires != None:
+        dico = ExtractInfoSalary(url_salaires)
+        return dico
+    else:
+        return {'minSal': None, 'moySal': None, 'maxSal': None, 'titrePage': None, 'localisationPage': None}
+        
+
 
 """
 poste = 'Data Scientist'
@@ -183,15 +170,17 @@ if url_salaires!=None:
     print(dico)
     
     """
+    
+"""
 poste = 'Data Scientist'
-ville = 'Johannesbourg'
-pays = 'Afrique du Sud'
+ville = 'Milan'
+pays = 'Italie'
 localisation = '{}, {}'.format(ville, pays)
 localisation_en = GoogleTranslator(target='en').translate(localisation)
 url_salaires= EcosiaGlassdoor(poste, localisation_en)  
 if url_salaires != None:
     dico = ExtractInfoSalary(url_salaires)
-    print(dico)
+    print(dico)"""
     
 """
   
