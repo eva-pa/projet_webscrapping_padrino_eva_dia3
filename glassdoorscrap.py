@@ -36,7 +36,46 @@ def EcosiaGlassdoor(poste, localisation):
         return driver.current_url
     else:
         return None
-def ExtractInfoSalary()
+
+
+def ExtractInfoSalary(url_glassdoor):
+    driver.get(url_glassdoor)
+    time.sleep(5)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    minimum = None
+    moyenne = None
+    maximum = None
+    titre_page = None
+    localisation_page
+    if len(soup.find_all('div', class_='d-flex flex-column col')) == 3:
+        minimum = soup.find_all(
+            'div', class_='d-flex flex-column col')[2].find_all('p')
+        if len(minimum) != 0:
+            minimum = minimum[0].text
+            minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
+
+    if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
+        moyenne = soup.find(
+            'div', class_='d-flex flex-column align-items-center col').find_all('p')
+        if len(moyenne) != 0:
+            moyenne = moyenne[0].text
+            moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
+
+    if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
+        maximum = soup.find(
+            'div', class_='d-flex flex-column align-items-end col').find_all('p')
+        if len(maximum) != 0:
+            maximum = maximum[0].text
+            maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
+    if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
+        titre_page = soup.find(
+            'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
+    if soup.find('span', class_='d-inline-flex pt-xxsm mt-0 align-items-center') != None:
+        localisation_page = soup.find(
+            'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
+
+    return {"minSal": minimum, "moySal": moyenne, "maxSal": maximum, "titrePage": titre_page, "localisationPage": localisation_page}
+
 
 # Test
 #soup = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")
@@ -126,19 +165,18 @@ def extractFromPage(soup):
 poste = 'Data Scientist'
 ville = 'Johannesbourg'
 pays = 'Afrique du Sud'
-localisation = '{}, {}'.format(ville,pays)
+localisation = '{}, {}'.format(ville, pays)
 url_salaires = formPosteLoc(poste, localisation)
 url_base = "https://www.glassdoor.com/Salaries/index.htm"
 if url_base == url_salaires:
-    # 1ere méthode traduction en anglais 
+    # 1ere méthode traduction en anglais
     localisation_en = GoogleTranslator(target='en').translate(localisation)
     url_salaires = formPosteLoc(poste, localisation_en)
     if url_base == url_salaires:
         # 2eme méthode recherche sur le moteur de recherche Ecosia:
-            url_salaires = EcosiaGlassdoor(poste,localisation_en)
+        url_salaires = EcosiaGlassdoor(poste, localisation_en)
     if url_salaires == None:
         print('Pas de réponse pour votre recherche')
-        
 
 
 """
