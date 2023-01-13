@@ -32,7 +32,7 @@ def EcosiaGlassdoor(poste, localisation):
     first_link.click()
     time.sleep(2)
     current = driver.current_url
-    if current.starswith("https://www.glassdoor"):
+    if current.startswith("https://www.glassdoor"):
         return driver.current_url
     else:
         return None
@@ -146,7 +146,7 @@ def formPosteLoc(poste, localisation):
     input_element.send_keys(poste)
 
     location_element = driver.find_element_by_id("LocationSearch")
-
+    time.sleep(4)
     # Remplir le champ de localisation avec une valeur
     location_element.send_keys(localisation)
 
@@ -161,13 +161,14 @@ def formPosteLoc(poste, localisation):
 def extractFromPage(soup):
     print(1)
 
-
+"""
 poste = 'Data Scientist'
 ville = 'Johannesbourg'
 pays = 'Afrique du Sud'
 localisation = '{}, {}'.format(ville, pays)
 url_salaires = formPosteLoc(poste, localisation)
 url_base = "https://www.glassdoor.com/Salaries/index.htm"
+
 if url_base == url_salaires:
     # 1ere méthode traduction en anglais
     localisation_en = GoogleTranslator(target='en').translate(localisation)
@@ -177,8 +178,21 @@ if url_base == url_salaires:
         url_salaires = EcosiaGlassdoor(poste, localisation_en)
     if url_salaires == None:
         print('Pas de réponse pour votre recherche')
-
-
+if url_salaires!=None:        
+    dico = ExtractInfoSalary(url_salaires)
+    print(dico)
+    
+    """
+poste = 'Data Scientist'
+ville = 'Johannesbourg'
+pays = 'Afrique du Sud'
+localisation = '{}, {}'.format(ville, pays)
+localisation_en = GoogleTranslator(target='en').translate(localisation)
+url_salaires= EcosiaGlassdoor(poste, localisation_en)  
+if url_salaires != None:
+    dico = ExtractInfoSalary(url_salaires)
+    print(dico)
+    
 """
   
 a = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")
