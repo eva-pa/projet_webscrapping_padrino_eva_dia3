@@ -31,12 +31,12 @@ def EcosiaGlassdoor(poste, localisation):
     time.sleep(2)
     first_link.click()
     time.sleep(2)
-    driver.get(driver.current_url)
-    time.sleep(4)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-    return soup
-
+    current = driver.current_url
+    if current.starswith("https://www.glassdoor"):
+        return driver.current_url
+    else:
+        return None
+def ExtractInfoSalary()
 
 # Test
 #soup = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")
@@ -65,14 +65,15 @@ if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
 if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
     maximum = soup.find(
         'div', class_='d-flex flex-column align-items-end col').find_all('p')
-    if len(maximum)!=0:
+    if len(maximum) != 0:
         maximum = maximum[0].text
         maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
-
-titre_page = soup.find(
-    'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
-localisation_page = soup.find(
-    'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
+if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
+    titre_page = soup.find(
+        'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
+if soup.find('span', class_='d-inline-flex pt-xxsm mt-0 align-items-center') != None:
+    localisation_page = soup.find(
+        'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
 
 
 def formPosteLoc(poste, localisation):
@@ -122,7 +123,6 @@ def extractFromPage(soup):
     print(1)
 
 
-"""
 poste = 'Data Scientist'
 ville = 'Johannesbourg'
 pays = 'Afrique du Sud'
@@ -135,10 +135,13 @@ if url_base == url_salaires:
     url_salaires = formPosteLoc(poste, localisation_en)
     if url_base == url_salaires:
         # 2eme méthode recherche sur le moteur de recherche Ecosia:
-            print(1)
-    
-    # Si l'addresse est la même on change la ville et le pays en anglais.
-    #data['avis_en'] = data['avis'].apply(lambda x: GoogleTranslator(source='fr', target='en').translate(x))
+            url_salaires = EcosiaGlassdoor(poste,localisation_en)
+    if url_salaires == None:
+        print('Pas de réponse pour votre recherche')
+        
+
+
+"""
   
 a = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")
 el=a.find('div',{'class':'d-flex flex-column align-items-center col'})
