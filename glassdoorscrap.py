@@ -46,7 +46,7 @@ def ExtractInfoSalary(url_glassdoor):
     moyenne = None
     maximum = None
     titre_page = None
-    localisation_page
+    localisation_page = None
     if len(soup.find_all('div', class_='d-flex flex-column col')) == 3:
         minimum = soup.find_all(
             'div', class_='d-flex flex-column col')[2].find_all('p')
