@@ -17,6 +17,8 @@ options.add_argument("--disable-gpu")
 driver = webdriver.Chrome(
     "C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/chromium/chromedriver.exe", options=options)
 
+# Variables globales:
+lst_idx_vie = ['idx_cout_vie', 'idx_loyer', 'idx_cout_vie_loyer', 'idx_courses', 'idx_prix_restaurants','idx_pouvoir_achat_local']
 
 def EcosiaGlassdoor(poste, localisation):
     driver.get("https://www.ecosia.org/")
@@ -148,6 +150,33 @@ def ObtainResultSal(poste,ville,pays):
         
 
 
+def SalaireNumbeoPoints(df, poste):
+    """
+    
+    Parameters
+    ----------
+    df : un dataframe avec les points triés par distance et avec seulement ceux
+    présents dans un périmètre défini par l'utilisateur.
+    poste : poste cherché par l'utilisateur
+
+    Returns
+    -------
+    None.
+
+    """
+    # On crée une liste de  salaire en scrappant glassdoor et en prenant la ville et pays contenues dans le df.
+    # Cette colonne va contenir un dictionnaire avec salaire moyen, minimum et maximum, et le titre et la localisation trouvée:
+    lst_SalairesDico = []
+    for index,row in df.iterrows():
+        ville = row['ville']
+        pays = row['Pays']
+        dicoSal = ObtainResultSal(poste,ville,pays)
+        lst_SalairesDico.append(dicoSal)
+    return lst_SalairesDico
+
+def GetRatio(df):
+    print('a')
+    
 """
 poste = 'Data Scientist'
 ville = 'Johannesbourg'

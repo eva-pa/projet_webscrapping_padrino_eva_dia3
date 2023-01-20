@@ -1,17 +1,21 @@
-##### Fonctions générales 
+# Fonctions générales
 import unicodedata
 from geopy.geocoders import Nominatim
 from haversine import haversine, Unit
-
-##### Initialisation de variables
+import pandas as pd
+# Initialisation de variables
 geolocator = Nominatim(user_agent="loc-numbeo")
+
 
 def RetirerAccentMot(mot):
     return ''.join(c for c in unicodedata.normalize('NFD', mot) if unicodedata.category(c) != 'Mn')
+
+
 def retirerAccentsListe(listeMots):
     return [RetirerAccentMot(x) for x in listeMots]
 
-def getLatLon(city,country):
+
+def getLatLon(city, country):
     """
     Cette fonction retourne un couple (latitude, longitude)
     pour une ville et un pays donné.
@@ -26,37 +30,52 @@ def getLatLon(city,country):
     latitude : float
     longitude : float
 
-    """      
+    """
     print(city)
-    print(country)  
+    print(country)
     city = city.partition('(')[0]
-    city ='Cartagena' if city == "Carthagène des Indes" else city
+    city = 'Cartagena' if city == "Carthagène des Indes" else city
     city = 'Washington Colombie' if city == 'Washington, District de Colombie' else city
-    city = city.replace('Nouvelle Ville de Taipei','Nouveau Taipei')
+    city = city.replace('Nouvelle Ville de Taipei', 'Nouveau Taipei')
     try:
         localisation = geolocator.geocode(f"{city}, {country}'")
     except:
-        localisation = geolocator.geocode(f"{city}, {country}'", timeout=10) #if localisation is None else localisation
+        # if localisation is None else localisation
+        localisation = geolocator.geocode(f"{city}, {country}'", timeout=10)
 
     lat = localisation.latitude
     lon = localisation.longitude
 
-    return lat,lon
+    return lat, lon
 
-def DistanceFromPoint(df,col_lat,col_lon,lat_point,lon_point):
+
+def DistanceFromPoint(df, col_lat, col_lon, lat_point, lon_point):
     pointInput = (lat_point, lon_point)
     distances = []
-    for index,row in df.iterrows():
-        point_df = (row[col_lat],row[col_lon])
-        distance = haversine(pointInput,point_df, unit=Unit.METERS)
+    for index, row in df.iterrows():
+        point_df = (row[col_lat], row[col_lon])
+        distance = haversine(pointInput, point_df, unit=Unit.METERS)
         distances.append(distance)
     return distances
 
-def SortDistancesAscending(df,col_dist):
+
+def SortDistancesAscending(df, col_dist):
+    print(df.sort_values(col_dist).head())
     return df.sort_values(col_dist)
 
-def DistanceMax(dist_max,sorted_df,col_dist):
-    return sorted_df[sorted_df[col_dist]<=distmax]
+
+def DistanceMax(dist_max, sorted_df, col_dist):
+    return sorted_df[sorted_df[col_dist] <= dist_max]
+
+
+def FiltreSortDf(df, col_dist, dist_max):
+    df_cop = df.copy(deep=False)
+    df_cop = SortDistancesAscending(df_cop, col_dist)
+    df_cop = DistanceMax(dist_max, df_cop, col_dist)
+    return df_cop
+
+
+
 """
 def remove_accents(string_list):
     # Créer une liste vide pour stocker les chaînes de caractères sans accent
