@@ -200,6 +200,20 @@ def modifCoordinatesV2():
     dir_final = '{}\\numbeo\\tabAll\\tabAllCountries_v2.csv'.format(path)
     df.to_csv(dir_final)
     return df    
+
+def modifTabV3():
+    path = os.getcwd()
+    directory = '{}\\numbeo\\tabAll\\tabAllCountries_v2.csv'.format(path)
+    df = pd.read_csv(directory)
+    lst_idx_vie = ['idx_cout_vie', 'idx_loyer', 'idx_cout_vie_loyer', 'idx_courses', 'idx_prix_restaurants','idx_pouvoir_achat_local']
+    # On remplace les virgules par des points
+    for idx_cout in lst_idx_vie:
+        df[idx_cout]= df[idx_cout].apply(lambda x: x.replace(',','.'))
+        df[idx_cout] = df[idx_cout].astype('float')
+    dir_final = '{}\\numbeo\\tabAll\\tabAllCountries_v3.csv'.format(path)
+    df.to_csv(dir_final)
+    return df
+    
 """
 Latitude et longitude à corriger:
 Quebec (city) Canada
