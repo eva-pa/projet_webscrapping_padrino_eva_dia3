@@ -3,6 +3,7 @@ import time
 from deep_translator import GoogleTranslator
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
+import pandas as pd
 # !pip install -U deep-translator
 
 options = webdriver.ChromeOptions()
@@ -174,9 +175,27 @@ def SalaireNumbeoPoints(df, poste):
         lst_SalairesDico.append(dicoSal)
     return lst_SalairesDico
 
-def GetRatio(df):
-    print('a')
-    
+
+def GetRatio(df, col_salaire):
+    """
+    Cette fonction permet d'ajouter des colonnes de ratio entre un salaire (minimum, moyen ou maximum)
+    et toutes les valeurs d'indices de coût de la vie.
+    Parameters
+    ----------
+    df : dataframe
+    col_salaire : colonne contenant soit le salaire minimum, moyen ou maximum.
+
+    Returns
+    -------
+    df : data frame
+
+    """
+    for element in lst_idx_vie:
+        new_name = 'ratio_{}_{}'.format(col_salaire, element)
+        df[new_name] = df.apply(lambda x: x[col_salaire]/x[element], axis = 1)
+    return df
+
+
 """
 poste = 'Data Scientist'
 ville = 'Johannesbourg'
