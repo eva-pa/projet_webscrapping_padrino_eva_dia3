@@ -5,6 +5,7 @@ from deep_translator import GoogleTranslator
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import pandas as pd
+import re
 # !pip install -U deep-translator
 
 options = webdriver.ChromeOptions()
@@ -30,13 +31,13 @@ def EcosiaGlassdoor(poste, localisation):
     recherche = driver.find_element_by_xpath(
         "/html/body/div/div/div/div[1]/header/div/form/div/div/div[1]/input")
     recherche.send_keys(query)
-    time.sleep(2)
+    #time.sleep(2)
     recherche.send_keys(Keys.RETURN)
     first_link = driver.find_element_by_xpath(
         "/html/body/div/div/div/main/div[1]/section/div[2]/div[2]/article/div[2]/div[1]/div[2]/a")
-    time.sleep(2)
+    #time.sleep(2)
     first_link.click()
-    time.sleep(2)
+    #time.sleep(2)
     current = driver.current_url
     if current.startswith("https://www.glassdoor"):
         return driver.current_url
@@ -46,9 +47,9 @@ def EcosiaGlassdoor(poste, localisation):
 
 def ExtractInfoSalary(url_glassdoor):
     driver.get(url_glassdoor)
-    time.sleep(5)
+    time.sleep(2)
     driver.get(url_glassdoor)
-    time.sleep(5)
+    #time.sleep(5)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     minimum = None
     moyenne = None
@@ -60,7 +61,11 @@ def ExtractInfoSalary(url_glassdoor):
             'div', class_='d-flex flex-column col')[2].find_all('p')
         if len(minimum) != 0:
             minimum = minimum[0].text
-            minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
+            print('Minimum:', minimum) #retirer
+            
+            #minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
+            minimum = ''.join(re.findall(r'\d', minimum))
+            minimum = int(minimum)
             minimum = minimum * 1000
 
     if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
@@ -68,14 +73,19 @@ def ExtractInfoSalary(url_glassdoor):
             'div', class_='d-flex flex-column align-items-center col').find_all('p')
         if len(moyenne) != 0:
             moyenne = moyenne[0].text
-            moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
+            #moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
+            moyenne = ''.join(re.findall(r'\d', moyenne))
+            moyenne = int(moyenne)
             moyenne = moyenne * 1000
     if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
         maximum = soup.find(
             'div', class_='d-flex flex-column align-items-end col').find_all('p')
         if len(maximum) != 0:
             maximum = maximum[0].text
-            maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
+            print('Maximum: ',maximum )
+            #maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
+            maximum = ''.join(re.findall(r'\d', maximum))
+            maximum = int(maximum)
             maximum = maximum * 1000
     if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
         titre_page = soup.find(

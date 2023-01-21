@@ -2,6 +2,9 @@ from fonctionsGen import getLatLon, DistanceFromPoint, FiltreSortDf, ColDict_toC
 from glassdoorscrap import SalaireNumbeoPoints, GetRatio
 import os
 import pandas as pd
+import plotly.graph_objs as go
+
+
 # Visualiser : Index seuls, ratios ou salaires seuls.
 
 
@@ -99,3 +102,17 @@ def VisuRatios(ville, pays, distance_max, poste, stat):
     df = GetRatio(df, stat)
     
     return df
+
+def BarChart():
+    # Définir les données pour le graphique
+    data = [go.Bar(
+        x=['A', 'B', 'C'],
+        y=[1, 2, 3]
+    )]
+
+    # Créer la figure
+    fig = go.Figure(data=data)
+
+    # Afficher le graphique
+    fig.show()
+    return fig
