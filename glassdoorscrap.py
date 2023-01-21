@@ -1,3 +1,4 @@
+from fonctionsGen import DistanceFromPoint, FiltreSortDf, ColDict_toCols
 from selenium import webdriver
 import time
 from deep_translator import GoogleTranslator
@@ -7,7 +8,7 @@ import pandas as pd
 # !pip install -U deep-translator
 
 options = webdriver.ChromeOptions()
-#options.add_argument('-headless')
+# options.add_argument('-headless')
 options.add_argument('-no-sandbox')
 options.add_argument('-disable-dev-shm-usage')
 options.add_argument("enable-automation")
@@ -19,7 +20,9 @@ driver = webdriver.Chrome(
     "C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/chromium/chromedriver.exe", options=options)
 
 # Variables globales:
-lst_idx_vie = ['idx_cout_vie', 'idx_loyer', 'idx_cout_vie_loyer', 'idx_courses', 'idx_prix_restaurants','idx_pouvoir_achat_local']
+lst_idx_vie = ['idx_cout_vie', 'idx_loyer', 'idx_cout_vie_loyer',
+               'idx_courses', 'idx_prix_restaurants', 'idx_pouvoir_achat_local']
+
 
 def EcosiaGlassdoor(poste, localisation):
     driver.get("https://www.ecosia.org/")
@@ -58,7 +61,7 @@ def ExtractInfoSalary(url_glassdoor):
         if len(minimum) != 0:
             minimum = minimum[0].text
             minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
-            minimum = minimum  * 1000
+            minimum = minimum * 1000
 
     if soup.find('div', class_='d-flex flex-column align-items-center col') != None:
         moyenne = soup.find(
@@ -66,34 +69,32 @@ def ExtractInfoSalary(url_glassdoor):
         if len(moyenne) != 0:
             moyenne = moyenne[0].text
             moyenne = [int(i) for i in moyenne.split() if i.isdigit()][0]
-            moyenne = moyenne  * 1000
+            moyenne = moyenne * 1000
     if soup.find('div', class_='d-flex flex-column align-items-end col') != None:
         maximum = soup.find(
             'div', class_='d-flex flex-column align-items-end col').find_all('p')
         if len(maximum) != 0:
             maximum = maximum[0].text
             maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
-            maximum = maximum  * 1000
+            maximum = maximum * 1000
     if soup.find('h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1') != None:
         titre_page = soup.find(
             'h2', class_='d-inline m-0 mr-std careerOverviewNav__CareerOverviewNavStyles__h1').text
     if soup.find('span', class_='d-inline-flex pt-xxsm mt-0 align-items-center') != None:
         localisation_page = soup.find(
             'span', class_='d-inline-flex pt-xxsm mt-0 align-items-center').text
-        
-    if minimum==None and maximum == None and moyenne==None:
-        if soup.find('div',class_='row mt-lg') != None:
-            moy = soup.find('div',class_='row mt-lg').find_all('span')
-            if len(moy)!=0:
+
+    if minimum == None and maximum == None and moyenne == None:
+        if soup.find('div', class_='row mt-lg') != None:
+            moy = soup.find('div', class_='row mt-lg').find_all('span')
+            if len(moy) != 0:
                 span_els = [el.text for el in moy]
-                moyenne = span_els[1].replace(',','')
+                moyenne = span_els[1].replace(',', '')
                 moyenne = [*moyenne]
                 moyenne = [int(i) for i in moyenne if i.isdigit()]
                 moyenne = int(''.join([str(i) for i in moyenne]))
 
     return {"minSal": minimum, "moySal": moyenne, "maxSal": maximum, "titrePage": titre_page, "localisationPage": localisation_page}
-
-
 
 
 def formPosteLoc(poste, localisation):
@@ -139,21 +140,20 @@ def formPosteLoc(poste, localisation):
     return driver.current_url
 
 
-def ObtainResultSal(poste,ville,pays):
+def ObtainResultSal(poste, ville, pays):
     localisation = '{}, {}'.format(ville, pays)
     localisation_en = GoogleTranslator(target='en').translate(localisation)
-    url_salaires= EcosiaGlassdoor(poste, localisation_en)  
+    url_salaires = EcosiaGlassdoor(poste, localisation_en)
     if url_salaires != None:
         dico = ExtractInfoSalary(url_salaires)
         return dico
     else:
         return {'minSal': None, 'moySal': None, 'maxSal': None, 'titrePage': None, 'localisationPage': None}
-        
 
 
 def SalaireNumbeoPoints(df, poste):
     """
-    
+
     Parameters
     ----------
     df : un dataframe avec les points triés par distance et avec seulement ceux
@@ -168,10 +168,10 @@ def SalaireNumbeoPoints(df, poste):
     # On crée une liste de  salaire en scrappant glassdoor et en prenant la ville et pays contenues dans le df.
     # Cette colonne va contenir un dictionnaire avec salaire moyen, minimum et maximum, et le titre et la localisation trouvée:
     lst_SalairesDico = []
-    for index,row in df.iterrows():
+    for index, row in df.iterrows():
         ville = row['ville']
         pays = row['Pays']
-        dicoSal = ObtainResultSal(poste,ville,pays)
+        dicoSal = ObtainResultSal(poste, ville, pays)
         lst_SalairesDico.append(dicoSal)
     return lst_SalairesDico
 
@@ -192,22 +192,21 @@ def GetRatio(df, col_salaire):
     """
     for element in lst_idx_vie:
         new_name = 'ratio_{}_{}'.format(col_salaire, element)
-        df[new_name] = df.apply(lambda x: x[col_salaire]/x[element], axis = 1)
+        df[new_name] = df.apply(lambda x: x[col_salaire]/x[element], axis=1)
     return df
 
 
-
-
 # tests:
-from fonctionsGen import DistanceFromPoint, FiltreSortDf, ColDict_toCols
-df = pd.read_csv('C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/projet/projet_webscrapping_padrino_eva_dia3/numbeo/tabAll/tabAllCountries_v3.csv')
-res = DistanceFromPoint(df, 'lat','lon',-26.20,28.049)
+"""
+df = pd.read_csv(
+    'C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/projet/projet_webscrapping_padrino_eva_dia3/numbeo/tabAll/tabAllCountries_v3.csv')
+res = DistanceFromPoint(df, 'lat', 'lon', -26.20, 28.049)
 df['distance_km'] = [i/1000 for i in res]
 df = FiltreSortDf(df, 'distance_km', 100)
 df['salaire'] = SalaireNumbeoPoints(df, 'Data Scientist')
 df = ColDict_toCols(df, 'salaire')
 #df = Col
-
+"""
 
 """
 poste = 'Data Scientist'
@@ -231,7 +230,7 @@ if url_salaires!=None:
     print(dico)
     
     """
-    
+
 """
 poste = 'Data Scientist'
 ville = 'Milan'
@@ -242,7 +241,7 @@ url_salaires= EcosiaGlassdoor(poste, localisation_en)
 if url_salaires != None:
     dico = ExtractInfoSalary(url_salaires)
     print(dico)"""
-    
+
 """
   
 a = EcosiaGlassdoor("Data Scientist", "Johannesbourg, Afrique du Sud")

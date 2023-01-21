@@ -1,5 +1,5 @@
 from fonctionsGen import getLatLon, DistanceFromPoint, FiltreSortDf, ColDict_toCols
-from glassdoorscrap import SalaireNumbeoPoints
+from glassdoorscrap import SalaireNumbeoPoints, GetRatio
 import os
 import pandas as pd
 # Visualiser : Index seuls, ratios ou salaires seuls.
@@ -29,7 +29,7 @@ def VisuIndex(ville, pays, distance_max):
     lat_point, lon_point = getLatLon(ville, pays)
     #Chargement table numbeo
     path = os.getcwd()    
-    file_name = '{}\\numbeo\\tabAll\\tabAllCountries_v2.csv'.format(path)
+    file_name = '{}\\numbeo\\tabAll\\tabAllCountries_v3.csv'.format(path)
     df = pd.read_csv(file_name)
     # On garde dans la table numbeo les points proches en dessous de la distance max.
     # Création d'une colonne avec toutes les distances des villes numbeo par rapport au point entré:
@@ -73,5 +73,29 @@ def VisuSalaires(ville, pays, distance_max, poste):
     
     return df
 
-def VisuRatios(ville, pays, distance_max, poste):
+def VisuRatios(ville, pays, distance_max, poste, stat):
+    """
+    Troisième niveau:
+        On veut obtenir salaire(min,maxnmoy)/ indice de cout de la vie.
+        On reprend la fonction VisuSalaires pour obtenir les villes proches
+        de notre point et les salaires dans ces villes pour un poste donné.
+        On calcule ensuite le ratio entre la stat de salaire choisie et l'indice du coût de la vie'
+
+    Parameters
+    ----------
+    ville : str, ville de notre choix
+    pays : str, pays de la ville.
+    distance_max : float| int, distance max entre notre point et ceux de la table numbeo
+    poste : str, poste demandé par la personne
+    stat : str, choix possibles : 'minSal', 'moySal' ou 'maxSal'
+
+    Returns
+    -------
+    dataframe avec les ratio salaires/indices proches du point demandé pour un poste demandé
+
+    """
+    df = VisuSalaires(ville, pays, distance_max, poste)
+    # Calcul des ratios pour la stat demandée.
+    df = GetRatio(df, stat)
     
+    return df
