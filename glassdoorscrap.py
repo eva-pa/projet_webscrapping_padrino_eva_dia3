@@ -196,6 +196,19 @@ def GetRatio(df, col_salaire):
     return df
 
 
+
+
+# tests:
+from fonctionsGen import DistanceFromPoint, FiltreSortDf, ColDict_toCols
+df = pd.read_csv('C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/projet/projet_webscrapping_padrino_eva_dia3/numbeo/tabAll/tabAllCountries_v3.csv')
+res = DistanceFromPoint(df, 'lat','lon',-26.20,28.049)
+df['distance_km'] = [i/1000 for i in res]
+df = FiltreSortDf(df, 'distance_km', 100)
+df['salaire'] = SalaireNumbeoPoints(df, 'Data Scientist')
+df = ColDict_toCols(df, 'salaire')
+#df = Col
+
+
 """
 poste = 'Data Scientist'
 ville = 'Johannesbourg'

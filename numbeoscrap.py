@@ -235,6 +235,7 @@ def testFunct(col_a, col_b):
 #SaveOneTab()
 #modifTabAllV2()
 #modifCoordinatesV2()
+#modifTabV3()
 #driver.close()
 
 

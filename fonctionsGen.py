@@ -74,6 +74,7 @@ def FiltreSortDf(df, col_dist, dist_max):
     df_cop = DistanceMax(dist_max, df_cop, col_dist)
     return df_cop
 
+
 def ColDict_toCols(df, col_dict):
     """
     Fonction qui permet de mettre en colonnes dans un dataframe 
@@ -91,7 +92,9 @@ def ColDict_toCols(df, col_dict):
     datafame avec les nouvelles colonnes
 
     """
-    return  pd.concat([df,df[col_dict].apply(pd.Series)], axis = 1)
+    return pd.concat([df, df[col_dict].apply(pd.Series)], axis=1)
+
+
 """
 def remove_accents(string_list):
     # Créer une liste vide pour stocker les chaînes de caractères sans accent
