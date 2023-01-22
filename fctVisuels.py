@@ -103,16 +103,28 @@ def VisuRatios(ville, pays, distance_max, poste, stat):
     
     return df
 
-def BarChart():
-    # Définir les données pour le graphique
+def x_axis_title(col1,col2, col3):
+    return '{}, {}, {} km'.format(col1, col2, round(col3,2))
+
+def BarChart(df, indice, order = False, stat = None, option_ratio = False):
+    # indice peut être none pour juste afficher les salaires
+    df['locComplete'] = df[['ville','Pays','distance_km']].apply(lambda x : x_axis_title(*x), axis = 1)
+    x_col = 'locComplete'
+    if stat == None and option_ratio == False:
+        y_col = indice
+    if stat != None and option_ratio == False:
+        y_col = stat
+    if stat!= None and option_ratio == True:
+        y_col = 'ratio_{}_{}'.format(stat, indice)
+
+    
     data = [go.Bar(
-        x=['A', 'B', 'C'],
-        y=[1, 2, 3]
+        x=df[x_col],
+        y= df[y_col],
+        text= round(df[y_col],2),
+        textposition='auto'
     )]
-
-    # Créer la figure
     fig = go.Figure(data=data)
-
-    # Afficher le graphique
-    fig.show()
+    if order == True:
+        fig.update_layout(xaxis={'categoryorder':'total descending'})
     return fig
