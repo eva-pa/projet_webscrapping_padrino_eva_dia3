@@ -47,7 +47,7 @@ def EcosiaGlassdoor(poste, localisation):
 
 def ExtractInfoSalary(url_glassdoor):
     driver.get(url_glassdoor)
-    time.sleep(2)
+    #time.sleep(2)
     driver.get(url_glassdoor)
     #time.sleep(5)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
