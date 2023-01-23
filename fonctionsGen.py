@@ -31,8 +31,6 @@ def getLatLon(city, country):
     longitude : float
 
     """
-    print(city)
-    print(country)
     city = city.partition('(')[0]
     city = 'Cartagena' if city == "Carthagène des Indes" else city
     city = 'Washington Colombie' if city == 'Washington, District de Colombie' else city
@@ -60,7 +58,6 @@ def DistanceFromPoint(df, col_lat, col_lon, lat_point, lon_point):
 
 
 def SortDistancesAscending(df, col_dist):
-    print(df.sort_values(col_dist).head())
     return df.sort_values(col_dist)
 
 

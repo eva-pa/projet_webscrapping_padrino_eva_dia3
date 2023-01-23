@@ -61,7 +61,7 @@ def ExtractInfoSalary(url_glassdoor):
             'div', class_='d-flex flex-column col')[2].find_all('p')
         if len(minimum) != 0:
             minimum = minimum[0].text
-            print('Minimum:', minimum) #retirer
+
             
             #minimum = [int(i) for i in minimum.split() if i.isdigit()][0]
             minimum = ''.join(re.findall(r'\d', minimum))
@@ -82,7 +82,6 @@ def ExtractInfoSalary(url_glassdoor):
             'div', class_='d-flex flex-column align-items-end col').find_all('p')
         if len(maximum) != 0:
             maximum = maximum[0].text
-            print('Maximum: ',maximum )
             #maximum = [int(i) for i in maximum.split() if i.isdigit()][0]
             maximum = ''.join(re.findall(r'\d', maximum))
             maximum = int(maximum)
