@@ -6,8 +6,10 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 import pandas as pd
 import re
+import os
 # !pip install -U deep-translator
-
+path_driver = os.getcwd()
+path_driver = "{}/chromium/chromedriver.exe".format(path_driver)
 options = webdriver.ChromeOptions()
 # options.add_argument('-headless')
 options.add_argument('-no-sandbox')
@@ -17,9 +19,9 @@ options.add_argument("--window-size=1920,1080")
 options.add_argument("--disable-extensions")
 options.add_argument("--dns-prefetch-disable")
 options.add_argument("--disable-gpu")
-driver = webdriver.Chrome(
-    "C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/chromium/chromedriver.exe", options=options)
-
+#driver = webdriver.Chrome(
+#    "C:/Users/evapa/EVA/ECOLE/ESILV/A5/WEBSCRAPPING/chromium/chromedriver.exe", options=options)
+driver = webdriver.Chrome(path_driver, options = options)
 # Variables globales:
 lst_idx_vie = ['idx_cout_vie', 'idx_loyer', 'idx_cout_vie_loyer',
                'idx_courses', 'idx_prix_restaurants', 'idx_pouvoir_achat_local']
