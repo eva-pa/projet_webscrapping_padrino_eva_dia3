@@ -1,9 +1,11 @@
 from fonctionsGen import getLatLon, DistanceFromPoint, FiltreSortDf, ColDict_toCols
-from glassdoorscrap import SalaireNumbeoPoints, GetRatio
+from glassdoorscrap import SalaireNumbeoPoints, GetRatio, ObtainResultSal
 import os
 import pandas as pd
 import plotly.graph_objs as go
-
+import folium
+from folium.features import DivIcon
+from IPython.display import display
 
 # Visualiser : Index seuls, ratios ou salaires seuls.
 
@@ -128,3 +130,56 @@ def BarChart(df, indice, order = False, stat = None, option_ratio = False):
     if order == True:
         fig.update_layout(xaxis={'categoryorder':'total descending'})
     return fig
+
+
+
+
+def afficherBar(ville, pays, distance_max,indice, poste, salaireStat, ratio, ordre_valeurs,lancerProgramme=False):
+    if lancerProgramme == True:
+        # premier niveau
+        if poste == '' and salaireStat == None:
+            df_Visu = VisuIndex(ville,pays,distance_max)
+            fig = BarChart(df=df_Visu,indice=indice,order=ordre_valeurs)
+            fig.update_layout(title="Graphique à barres des valeurs d'indices de {} dans un rayon de {} km".format(indice, distance_max),
+                  xaxis_title="Villes et distances par rapport à {}, {}".format(ville, pays),
+                  yaxis_title="Valeur de l'indice {}".format(indice))
+            fig.show()
+        if poste !='' and salaireStat != None and ratio == False:
+            df_Visu = VisuSalaires(ville, pays, distance_max, poste)
+            fig = BarChart(df=df_Visu,indice=indice, stat = salaireStat,order=ordre_valeurs,option_ratio=ratio)
+            fig.update_layout(title="Graphique à barres des salaires sur la statistique {} pour le poste {} dans un rayon de {} km".format(salaireStat, poste, distance_max),
+                  xaxis_title="Villes et distances par rapport à {}, {}".format(ville, pays),
+                  yaxis_title="Valeur de {} pour le poste de {}".format(salaireStat, poste))
+            fig.show()
+        if poste !='' and salaireStat != None and ratio == True:
+            df_Visu = VisuRatios(ville,pays,distance_max,poste,salaireStat)
+            fig = BarChart(df=df_Visu,indice=indice,order=ordre_valeurs,stat=salaireStat,option_ratio=ratio)
+            fig.update_layout(title="Graphique à barres des ratios entre la statistique de salaire {} et l'indice {} pour le poste {} dans un rayon de {} km".format(salaireStat, indice, poste, distance_max),
+                  xaxis_title="Villes et distances par rapport à {}, {}".format(ville, pays),
+                  yaxis_title="Valeur du ratio entre {} et {} pour le poste de {}".format(salaireStat, indice, poste))
+            fig.show()
+            
+def afficherCarte(ville, pays, distance_max,indice, poste, salaireStat, ratio,lancerProgramme=False):
+    if lancerProgramme == True:
+        df_Visu = 0
+        lat_point, lon_point = getLatLon(ville, pays)
+        if poste == '' and salaireStat == None:
+            df_Visu = VisuIndex(ville,pays,distance_max)
+            colAffichage = indice
+        if poste !='' and salaireStat != None and ratio == False:
+            df_Visu = VisuSalaires(ville, pays, distance_max, poste)
+            colAffichage = salaireStat
+        if poste !='' and salaireStat != None and ratio == True:
+            df_Visu = VisuRatios(ville,pays,distance_max,poste,salaireStat)
+            colAffichage = 'ratio_{}_{}'.format(salaireStat,indice)
+        if df_Visu.shape[0]!=0:
+            m = folium.Map([float(lat_point), float(lon_point)], zoom_start=5)
+            for ville_df in df_Visu.ville.unique():
+                latitude = df_Visu[df_Visu['ville']==ville_df]['lat'].iloc[0]
+                longitude = df_Visu[df_Visu['ville']==ville_df]['lon'].iloc[0]
+                text = round(df_Visu[df_Visu['ville']==ville_df][colAffichage].iloc[0],2)
+                folium.map.Marker([latitude, longitude],icon_size=(50,16),popup=ville).add_to(m)
+                folium.map.Marker([latitude+ 0.05, longitude - 0.05], icon= DivIcon(icon_size=(150,36),icon_anchor=(0,0),html='<div style="font-size: 11pt;background: white; width: 30px">%s</div>' % text,)).add_to(m)
+            folium.map.Marker([lat_point, lon_point],icon_size=(50,16),popup=ville).add_to(m)
+            display(m)
+            return m            
